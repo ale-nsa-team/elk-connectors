@@ -43,3 +43,53 @@ elk_connectors/
 Copy the example configuration and update it:
   ```bash
 cp config/appmon_config.env.example config/appmon_config.env
+`````
+
+# installation 
+# 1- Install Filebeat
+ ```bash
+sudo apt update
+sudo apt install filebeat
+`````
+- Copy Filebeat configuration from the project to # /etc/filebeat/filebeat.yml
+- Enable and start Filebeat:
+  ```bash
+     sudo systemctl enable filebeat
+     sudo systemctl start filebeat
+  `````
+# 2- Install Logstash
+ ```bash
+sudo apt install logstash
+`````
+- Copy Logstash configuration from the project
+- Start Logstash:
+  ```bash
+    sudo systemctl enable logstash
+    sudo systemctl start logstash
+  `````
+# 3- Install Kibana
+ ```bash
+sudo apt install Kibana
+`````
+- in kibana configuration (/etc/kibana/kibana.yml) add this ligne:
+  ```bash
+    server.host: "0.0.0.0"
+  `````
+- Start kibana:
+  ```bash
+    sudo systemctl enable kibana
+    sudo systemctl start kibana
+  `````
+# 4- Install Flask server
+ ```bash
+pip install flask
+`````
+- and then run the script 
+  ```bash
+    python flask_server.py.py
+  `````
+- The server listens on 0.0.0.0:31175 and saves files in /tmp/uploads.
+
+
+  
+
