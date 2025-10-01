@@ -1,6 +1,6 @@
 # elk-connectors
 
-#ELK Connectors
+# ELK Connectors
 This project provides a set of scripts and configurations to extract, transform, and send logs from switches and network devices to an ELK server (Elasticsearch, Logstash, Kibana). It includes:
   Filebeat configuration to collect RADIUS, DPI, and syslog logs
   Logstash configuration to parse and enrich logs before sending them to Elasticsearch
@@ -8,7 +8,7 @@ This project provides a set of scripts and configurations to extract, transform,
   A Flask server to receive uploaded files
 Additionally, the reception of files on the ELK server is automated every 10 minutes, ensuring that switch data is regularly synchronized and available for analysis.
 
-#Table of Contents
+# Table of Contents
 - Project Structure
 - Prerequisites
 - Configuration
@@ -18,7 +18,7 @@ Additionally, the reception of files on the ELK server is automated every 10 min
 - Log Architecture
 - Security
 
-#Project Structure
+# Project Structure
 elk_connectors/
 ├─ elk_code_source/
     ├─ config/
@@ -28,5 +28,18 @@ elk_connectors/
     ├─ scripts/
     │  └─ push_config.sh              # Script to upload configuration files to the switch
     ├─ server/
-    │  └─ flask_server.py             # Flask server to receive uploaded files
+    │  └─ flask_server.py             # Flask server to receive uploaded files and save them locally
     └─ README.md
+
+# Prerequisites
+    - Python 3.10+ (for Flask server)
+    - Flask (pip install flask)
+    - Filebeat (compatible version with Logstash)
+    - Logstash (compatible version with Elasticsearch)
+    - curl (for upload script)
+    - Network access to: (Switch (SWITCH_IP), ELK server (UPLOAD_FILE_URL), Logstash port (5044), Flask port (31175)) 
+
+#  Configuration
+Copy the example configuration and update it:
+  ```bash
+cp config/appmon_config.env.example config/appmon_config.env
