@@ -14,9 +14,9 @@ Additionally, the reception of files on the ELK server is automated every 10 min
 - Configuration
 - Installation
 - Usage
-- Automated Uploads (Every 10 Minutes)
+- Automated Uploads 
 - Log Architecture
-- Security
+- quick reminder
 
 # Project Structure
 elk_connectors/
@@ -107,7 +107,42 @@ sudo apt install freeradius freeradius-utils -y
    sudo freeradius -X
   `````
 
+# Usage
+```bash
+   chmod +x push_config.sh
+   ./push_config.sh
+  `````
+- Authenticates to the switch
+- Uploads each file listed in UPLOAD_FILE_NAMES
+- Sends them to the ELK server (Flask)
+# in this case: 
+- Filebeat collects RADIUS, DPI, and Fortigate syslog logs
+- Logstash parses and enriches logs, then sends them to Elasticsearch
+- Logs are indexed in Elasticsearch as follows:
+    - RADIUS	sw-radius-logs-YYYY.MM.dd
+    - DPI	sw-dpi-logs-test-YYYY.MM.dd
+    - Firewall	sw-firewall-syslog-YYYY.MM.dd
+ 
+# Automated Uploads
+To automate uploads from the switch to the ELK server every 10 minutes, use a cron job:
+```bash
+   crontab -e
+  `````
+add the following line:
+```bash
+   */10 * * * * /home/elkadmin/elk-connectors/scripts/push_config.sh >> /home/elkadmin/elk-connectors/logs/upload.log 2>&1
+  `````
+# Log Architecture
+  # RADIUS Logs
+    - Extracts: username, NAS IP, VLAN, MAC, timestamps, octets/packets
+  # DPI Logs
+    - parses CSV with IPs, ports, protocol, application, bytes/packets, timestam
+  # Firewall
+    - Extracts: IPs (external), applications, time in and out, type, action, policyid, ports, bytes, packets, scores...
 
+# quick reminder
+- Keep appmon_config.env local and add .env to .gitignore.
+    
 
 
   
