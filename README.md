@@ -8,6 +8,7 @@ It includes:
 - Logstash configuration to parse and enrich data before sending it to Elasticsearch
 - A script to upload configuration files to switches
 - A Flask server to receive and store uploaded files
+
 Data reception on the ELK server is automated every 10 minutes, keeping information synchronized and ready for analysis.
 
 # Table of Contents
