@@ -24,8 +24,9 @@ elk_connectors/
 ├─ elk_code_source/
     ├─ config/
     │  └─ appmon_config.env.example   # Switch & ELK configuration example
-       └─  filebeat.yml               # configuration to collect logs
+       └─ filebeat.yml                # configuration to collect logs
        └─ logstash.conf               # configuration to parse and enrich logs
+       └─ client.conf                 # Define switches or devices allowed to send RADIUS requests
     ├─ scripts/
     │  └─ push_config.sh              # Script to upload configuration files to the switch
     ├─ server/
