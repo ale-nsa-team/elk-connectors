@@ -86,9 +86,28 @@ pip install flask
 `````
 - and then run the script 
   ```bash
-    python flask_server.py.py
+    python flask_server.py
   `````
 - The server listens on 0.0.0.0:31175 and saves files in /tmp/uploads.
+
+# 5- Installing FreeRADIUS
+FreeRADIUS is an open-source RADIUS server.
+In the context of ELK Connectors, FreeRADIUS is only used to correctly read RADIUS Accounting logs received from the switch or other network equipment.
+```bash
+sudo apt install freeradius freeradius-utils -y
+`````
+- Enable and start the FreeRADIUS service:
+  ```bash
+    sudo systemctl enable freeradius
+    sudo systemctl start freeradius
+  `````
+- Basic Configuration, in /etc/freeradius/3.0/clients.conf: define switches or devices allowed to send RADIUS requests is available in elk_code_source/config/client.config
+- Enable debug mode to see logs in real time:
+  ```bash
+   sudo freeradius -X
+  `````
+
+
 
 
   
