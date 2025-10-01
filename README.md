@@ -19,6 +19,7 @@ Additionally, the reception of files on the ELK server is automated every 10 min
 - quick reminder
 
 # Project Structure
+```text
 elk_connectors/
 ├─ elk_code_source/
     ├─ config/
@@ -30,7 +31,7 @@ elk_connectors/
     ├─ server/
     │  └─ flask_server.py             # Flask server to receive uploaded files and save them locally
     └─ README.md
-
+`````
 # Prerequisites
     - Python 3.10+ (for Flask server)
     - Flask (pip install flask)
