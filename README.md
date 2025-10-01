@@ -134,11 +134,11 @@ add the following line:
   `````
 # Log Architecture
   # RADIUS Logs
-    - Extracts: username, NAS IP, VLAN, MAC, timestamps, octets/packets
+  - Extracts: username, NAS IP, VLAN, MAC, timestamps, octets/packets
   # DPI Logs
-    - parses CSV with IPs, ports, protocol, application, bytes/packets, timestam
+  - parses CSV with IPs, ports, protocol, application, bytes/packets, timestam
   # Firewall
-    - Extracts: IPs (external), applications, time in and out, type, action, policyid, ports, bytes, packets, scores...
+  - Extracts: IPs (external), applications, time in and out, type, action, policyid, ports, bytes, packets, scores...
 
 # quick reminder
 - Keep appmon_config.env local and add .env to .gitignore.
