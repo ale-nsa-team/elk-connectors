@@ -1,12 +1,14 @@
 # elk-connectors
 
 # ELK Connectors
-This project provides a set of scripts and configurations to extract, transform, and send logs from switches and network devices to an ELK server (Elasticsearch, Logstash, Kibana). It includes:
-  Filebeat configuration to collect RADIUS, DPI, and syslog logs
-  Logstash configuration to parse and enrich logs before sending them to Elasticsearch
-  A script to upload configuration files to the switch
-  A Flask server to receive uploaded files
-Additionally, the reception of files on the ELK server is automated every 10 minutes, ensuring that switch data is regularly synchronized and available for analysis.
+This project provides scripts and configurations to collect and send data from network switches and devices to an ELK stack (Elasticsearch, Logstash, Kibana).
+It handles DPI telemetry, authentication events (RADIUS), and firewall traffic logs (via syslog).
+It includes:
+- Filebeat configuration to collect telemetry and logs
+- Logstash configuration to parse and enrich data before sending it to Elasticsearch
+- A script to upload configuration files to switches
+- A Flask server to receive and store uploaded files
+Data reception on the ELK server is automated every 10 minutes, keeping information synchronized and ready for analysis.
 
 # Table of Contents
 - Project Structure
@@ -40,7 +42,8 @@ elk_connectors/
     - Logstash (compatible version with Elasticsearch)
     - curl (for upload script)
     - Network access to: (Switch (SWITCH_IP), ELK server (UPLOAD_FILE_URL), Logstash port (5044), Flask port (31175)) 
-
+    - DPI must be enabled on the switch or access point (AP) for application enforcement, with all applications activated directly in OV.
+    - Authentication must be configured on the switch or AP using an AAA profile that forwards RADIUS accounting data to the ELK server, managed directly in OV
 #  Configuration
 Copy the example configuration and update it:
   ```bash
