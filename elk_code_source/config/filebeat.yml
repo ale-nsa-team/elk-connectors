@@ -1,0 +1,64 @@
+# ============================== Filebeat inputs ===============================
+
+filebeat.inputs:
+
+- type: log
+  enabled: true
+  paths:
+    - /var/log/freeradius/radacct/*/detail-*
+  tags: ["radius"]
+  multiline:
+    pattern: '^[A-Z][a-z]{2} [A-Z][a-z]{2} \d{2} \d{2}:\d{2}:\d{2} \d{4}$'
+    negate: true
+    match: after
+
+- type: log
+  enabled: true
+  paths:
+    - /tmp/uploads/appmon_enforcement_flow_records.csv
+  tags: ["dpi", "enforcement"]
+  ignore_older: 0
+
+- type: log
+  enabled: true
+  paths:
+    - /tmp/uploads/appmon_monitoring_flow_records.csv
+  tags: ["dpi", "monitoring"]
+  ignore_older: 0
+
+- type: udp
+  max_message_size: 10KiB
+  host: "0.0.0.0:514"
+  tags: ["syslog"]
+  fields:
+    log_source: fortigate
+  fields_under_root: true
+# =============================== Setup Kibana ==================================
+setup.kibana:
+  host: "http://172.26.11.160:5601"
+
+# ============================== Output to Logstash =============================
+output.logstash:
+  hosts: ["172.26.11.160:5044"]
+
+# =============================== Logging =======================================
+logging.level: debug
+logging.to_files: true
+logging.files:
+  path: /var/log/filebeat
+  name: filebeat.log
+  keepfiles: 7
+  permissions: 0644
+
+# =============================== Seccomp workaround for Ubuntu 22.04+ =========
+seccomp:
+  default_action: allow
+  syscalls:
+    - action: allow
+      names: ["rseq"]
+
+# =============================== Modules =======================================
+filebeat.config.modules:
+  path: ${path.config}/modules.d/*.yml
+  enabled: true
+
