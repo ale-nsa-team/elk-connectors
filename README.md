@@ -6,7 +6,7 @@ It handles DPI telemetry, authentication events (RADIUS), and firewall traffic l
 It includes:
 - Filebeat configuration to collect telemetry and logs
 - Logstash configuration to parse and enrich data before sending it to Elasticsearch
-- A script to upload configuration files to switches
+- A script to upload flow record files to the ELK server.
 - A Flask server to receive and store uploaded files
 
 Data reception on the ELK server is automated every 10 minutes, keeping information synchronized and ready for analysis.
