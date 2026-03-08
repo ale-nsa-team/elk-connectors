@@ -96,7 +96,7 @@ pip install flask
   `````
 - The server listens on 0.0.0.0:31175 and saves files in /tmp/uploads.
 ### Run the Flask Server Permanently (Recommended)
-To run the Flask server continuously, create a **systemd service**.
+To run the Flask server continuously, create a systemd service.
 #### 1. Create a service file
 ```bash
 sudo nano /etc/systemd/system/elk-flask.service
