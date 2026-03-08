@@ -95,9 +95,9 @@ pip install flask
     python flask_server.py
   `````
 - The server listens on 0.0.0.0:31175 and saves files in /tmp/uploads.
-## Run the Flask Server Permanently (Recommended)
+### Run the Flask Server Permanently (Recommended)
 To run the Flask server continuously, create a **systemd service**.
-### 1. Create a service file
+#### 1. Create a service file
 ```bash
 sudo nano /etc/systemd/system/elk-flask.service
 ```
@@ -116,19 +116,19 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 ```
-### 2. Reload systemd
+#### 2. Reload systemd
 ```bash
 sudo systemctl daemon-reload
 ```
-### 3. Start the service
+#### 3. Start the service
 ```bash
 sudo systemctl start elk-flask
 ```
-### 4. Enable automatic startup at boot
+#### 4. Enable automatic startup at boot
 ```bash
 sudo systemctl enable elk-flask
 ```
-### 5. Check service status
+#### 5. Check service status
 ```bash
 sudo systemctl status elk-flask
 ```
