@@ -95,6 +95,47 @@ pip install flask
     python flask_server.py
   `````
 - The server listens on 0.0.0.0:31175 and saves files in /tmp/uploads.
+## Run the Flask Server Permanently (Recommended)
+To run the Flask server continuously, create a **systemd service**.
+### 1. Create a service file
+```bash
+sudo nano /etc/systemd/system/elk-flask.service
+```
+Add the following configuration:
+```ini
+[Unit]
+Description=ELK Flask Upload Server
+After=network.target
+
+[Service]
+User=elkadmin
+WorkingDirectory=/home/elkadmin/elk-connectors/server
+ExecStart=/usr/bin/python3 flask_server.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+### 2. Reload systemd
+```bash
+sudo systemctl daemon-reload
+```
+### 3. Start the service
+```bash
+sudo systemctl start elk-flask
+```
+### 4. Enable automatic startup at boot
+```bash
+sudo systemctl enable elk-flask
+```
+### 5. Check service status
+```bash
+sudo systemctl status elk-flask
+```
+Logs can be viewed with:
+```bash
+journalctl -u elk-flask -f
+```
 
 # 5- Installing FreeRADIUS
 FreeRADIUS is an open-source RADIUS server.
